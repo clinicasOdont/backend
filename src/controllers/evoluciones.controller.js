@@ -13,7 +13,7 @@ export const getEvoluciones = async (req, res) => {
 export const getEvolucion = async (req, res) => {
   try {
     const { id } = req.params;
-    const [rows] = await pool.query("SELECT * FROM evoluciones WHERE id = ?", [
+    const [rows] = await pool.query("SELECT * FROM evoluciones WHERE documento = ?", [
       id,
     ]);
 
