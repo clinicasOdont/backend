@@ -21,11 +21,12 @@ export const getEvolucion = async (req, res) => {
       return res.status(404).json({ message: "Historia not found" });
     }
 
-    res.json(rows[0]);
+    res.json(rows); // Devuelve todos los registros en 'rows'
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
+
 
 export const deleteEvoluciones = async (req, res) => {
   try {
