@@ -13,7 +13,7 @@ export const getHistorias = async (req, res) => {
 export const getHistoria = async (req, res) => {
     try {
         const { id } = req.params;
-        const [rows] = await pool.query("SELECT * FROM historias WHERE id = ?", [id]);
+        const [rows] = await pool.query("SELECT * FROM historias WHERE documento = ?", [id]);
 
         if (rows.length <= 0) {
             return res.status(404).json({ message: "Historia not found" });
