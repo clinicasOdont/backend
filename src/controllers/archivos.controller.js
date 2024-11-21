@@ -56,8 +56,8 @@ export const uploadImage = (req, res) => {
             const imageData = {
                 message: "Image uploaded successfully",
                 url: result.secure_url,
-                // public_id: result.public_id,
-                public_id: publicId,
+                public_id: result.public_id,
+                // public_id: publicId,
                 fecha: new Date(), 
             };
 
