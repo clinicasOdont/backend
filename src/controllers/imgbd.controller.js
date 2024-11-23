@@ -10,13 +10,13 @@ export const getReferencias = async (req, res) => {
     }
 };
 
-export const getReferencia = async (req, res) => {
+export const getOdontograma = async (req, res) => {
     try {
         const { id } = req.params;
-        const [rows] = await pool.query("SELECT * FROM referencias WHERE id = ?", [id]);
+        const [rows] = await pool.query("SELECT * FROM odontogramas WHERE public_id = ?", [id]);
 
         if (rows.length <= 0) {
-            return res.status(404).json({ message: "Referencia not found" });
+            return res.status(404).json({ message: "Odontograma not found" });
         }
 
         res.json(rows[0]);
@@ -43,10 +43,10 @@ export const deleteReferencias = async (req, res) => {
 
 export const createImagen = async (req, res) => {
     try {
-        const {message, url, public_id, fecha } = req.body;
+        const {message, url, public_id,fecha } = req.body;
         const [result] = await pool.query(
             "INSERT INTO odontogramas (message, url, public_id, fecha) VALUES (?, ?, ?, ?)",
-            [url, public_id, fecha]
+            [message,url, public_id, fecha]
         );
 
         res.status(201).json({ id: result.insertId, message, url, public_id, fecha});

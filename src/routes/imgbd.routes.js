@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   createImagen,
   deleteReferencias,
-  getReferencia,
+  getOdontograma,
   getReferencias,
   updateReferencia,
 } from "../controllers/imgbd.controller.js";
@@ -13,7 +13,7 @@ const router = Router();
 router.get("/referencias", getReferencias);
 
 // GET An referencias
-router.get("/referencias/:id", getReferencia);
+router.get("/imgbd/:id", getOdontograma);
 
 // DELETE An referencias
 router.delete("/referencias/:id", deleteReferencias);
