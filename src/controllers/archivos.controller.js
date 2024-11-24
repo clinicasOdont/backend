@@ -2,7 +2,7 @@ import path from "path";
 import fs from 'fs';
 
 import cloudinary from 'cloudinary';
-import { createImagen } from "../controllers/imgbd.controller.js";
+// import { createImagen } from "../controllers/imgbd.controller.js";
 
 // Configurar Cloudinary con tus credenciales
 cloudinary.v2.config({

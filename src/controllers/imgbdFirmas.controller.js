@@ -1,22 +1,22 @@
 import { pool } from "../db.js";
 import https from 'https'; // Cambiado de http a https para manejar URLs https
 
-export const getReferencias = async (req, res) => {
+export const getFirmas = async (req, res) => {
     try {
-        const [rows] = await pool.query("SELECT * FROM referencias");
+        const [rows] = await pool.query("SELECT * FROM firmas");
         res.json(rows);
     } catch (error) {
         return res.status(500).json({ message: "Something went wrong" });
     }
 };
 
-export const getOdontograma = async (req, res) => {
+export const getFirma = async (req, res) => {
     try {
         const { id } = req.params;
-        const [rows] = await pool.query("SELECT * FROM odontogramas WHERE public_id = ?", [id]);
+        const [rows] = await pool.query("SELECT message, url, public_id, fecha, id FROM firmas WHERE public_id = ? ORDER BY id DESC LIMIT 1", [id]);
 
         if (rows.length <= 0) {
-            return res.status(404).json({ message: "Odontograma not found" });
+            return res.status(404).json({ message: "Firma not found" });
         }
 
         res.json(rows[0]);
@@ -25,10 +25,10 @@ export const getOdontograma = async (req, res) => {
     }
 };
 
-export const deleteReferencias = async (req, res) => {
+export const deleteFirmas = async (req, res) => {
     try {
         const { id } = req.params;
-        const [rows] = await pool.query("DELETE FROM referencias WHERE id = ?", [id]);
+        const [rows] = await pool.query("DELETE FROM firmas WHERE id = ?", [id]);
 
         if (rows.affectedRows <= 0) {
             return res.status(404).json({ message: "Referencias not found" });
@@ -41,11 +41,11 @@ export const deleteReferencias = async (req, res) => {
 };
 
 
-export const createImagen = async (req, res) => {
+export const createFirma = async (req, res) => {
     try {
         const {message, url, public_id,fecha } = req.body;
         const [result] = await pool.query(
-            "INSERT INTO odontogramas (message, url, public_id, fecha) VALUES (?, ?, ?, ?)",
+            "INSERT INTO firmas (message, url, public_id, fecha) VALUES (?, ?, ?, ?)",
             [message,url, public_id, fecha]
         );
 
@@ -56,20 +56,20 @@ export const createImagen = async (req, res) => {
     
 };
 
-export const updateReferencia = async (req, res) => {
+export const updateFirma = async (req, res) => {
     try {
         const { id } = req.params;
-        const { descripcion, iva_porcentaje, precio, fecha } = req.body;
+        const {  message, url, public_id, fecha } = req.body;
 
         const [result] = await pool.query(
-            "UPDATE referencias SET descripcion = IFNULL(?, descripcion), iva_porcentaje = IFNULL(?, iva_porcentaje), precio = IFNULL(?, precio), fecha = IFNULL(?, fecha) WHERE id = ?",
-            [descripcion, iva_porcentaje, precio, fecha, id]
+            "UPDATE firmas SET message = IFNULL(?, message), url = IFNULL(?, url), public_id = IFNULL(?, public_id), fecha = IFNULL(?, fecha) WHERE id = ?",
+            [message, url, public_id, fecha, id]
         );
 
         if (result.affectedRows === 0)
-            return res.status(404).json({ message: "Referencia not found" });
+            return res.status(404).json({ message: "Firma not found" });
 
-        const [rows] = await pool.query("SELECT * FROM referencias WHERE id = ?", [id]);
+        const [rows] = await pool.query("SELECT * FROM firmas WHERE id = ?", [id]);
 
         res.json(rows[0]);
     } catch (error) {

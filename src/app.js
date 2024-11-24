@@ -8,8 +8,8 @@ import documentosRoutes from "./routes/documentos.routes.js";
 import consentimientosRoutes from "./routes/consentimientos.routes.js";
 import archivosRoutes from "./routes/odontogramas.routes.js";
 import referenciasRoutes from "./routes/referencias.routes.js";
-import imgbdRoutes from "./routes/imgbd.routes.js";
-
+import imgbdOdontogramaRoutes from "./routes/imgbdOdontograma.routes.js";
+import imgbdFirmaRoutes from "./routes/imgbdFirma.routes.js";
 import signsRoutes from "./routes/signs.routes.js";
 import cors from 'cors'; // Importar cors usando ES Modules
 import bodyParser from "body-parser"; // Changed require to import
@@ -43,7 +43,8 @@ app.use("/api", documentosRoutes);
 app.use("/api", archivosRoutes)
 app.use("/api", signsRoutes)
 app.use("/api", referenciasRoutes)
-app.use("/api", imgbdRoutes)
+app.use("/api", imgbdOdontogramaRoutes)
+app.use("/api", imgbdFirmaRoutes)
 app.use("/api", consentimientosRoutes);
 
 app.use((req, res, next) => {
