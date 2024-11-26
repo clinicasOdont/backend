@@ -13,7 +13,7 @@ export const getEvoluciones = async (req, res) => {
 export const getEvolucion = async (req, res) => {
   try {
     const { id } = req.params;
-    const [rows] = await pool.query("SELECT * FROM evoluciones WHERE documento = ?", [
+    const [rows] = await pool.query("SELECT evoluciones.*,firmas.url FROM evoluciones JOIN firmas on evoluciones.id=firmas.message WHERE documento = ?", [
       id,
     ]);
 
