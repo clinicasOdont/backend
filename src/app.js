@@ -13,6 +13,7 @@ import imgbdFirmaRoutes from "./routes/imgbdFirma.routes.js";
 import signsRoutes from "./routes/signs.routes.js";
 import cors from 'cors'; // Importar cors usando ES Modules
 import bodyParser from "body-parser"; // Changed require to import
+import reportesRoutes from "./routes/reportes.routes.js";
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use("/api", signsRoutes)
 app.use("/api", referenciasRoutes)
 app.use("/api", imgbdOdontogramaRoutes)
 app.use("/api", imgbdFirmaRoutes)
+app.use("/api", reportesRoutes)
 app.use("/api", consentimientosRoutes);
 
 app.use((req, res, next) => {
