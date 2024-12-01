@@ -3,7 +3,7 @@ import https from "https"; // Cambiado de http a https para manejar URLs https
 
 export const getPlanillas = async (req, res) => {
   try {
-    const [rows] = await pool.query("SELECT '' AS `FECHA`, p.tipo_documento AS `TIPO DOC`, p.documento, p.nombre, p.genero AS `SEXO`, p.edad, e.motivo AS `DX`, e.procedimiento, '' AS `VALOR PROCEDIMIENTO`, '' AS `MEDIO DE PAGO`, e.hora AS `HORA DE ATENCION`, p.nacimiento, p.nacionalidad, '' AS `PAIS RESIDENCIA` FROM pacientes p JOIN evoluciones e ON p.documento = e.documento");
+    const [rows] = await pool.query("SELECT e.fecha_registro AS `fecha`, p.tipo_documento AS `tipo_doc`, p.documento, p.nombre, p.genero AS `sexo`, p.edad, e.motivo AS `DX`, e.procedimiento, '' AS `valor_procedimiento`, '' AS `medio_de_pago`, e.hora AS `hora_de_atencion`, p.nacimiento, p.nacionalidad, '' AS `pais_residencia` FROM pacientes p JOIN evoluciones e ON p.documento = e.documento");
     res.json(rows);
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
