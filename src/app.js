@@ -8,6 +8,8 @@ import documentosRoutes from "./routes/documentos.routes.js";
 import consentimientosRoutes from "./routes/consentimientos.routes.js";
 import archivosRoutes from "./routes/odontogramas.routes.js";
 import referenciasRoutes from "./routes/referencias.routes.js";
+import diagnosticosRoutes from "./routes/diagnosticos.routes.js";
+import procedimientosRoutes from "./routes/procedimientos.routes.js";
 import imgbdOdontogramaRoutes from "./routes/imgbdOdontograma.routes.js";
 import imgbdFirmaRoutes from "./routes/imgbdFirma.routes.js";
 import signsRoutes from "./routes/signs.routes.js";
@@ -44,6 +46,8 @@ app.use("/api", documentosRoutes);
 app.use("/api", archivosRoutes)
 app.use("/api", signsRoutes)
 app.use("/api", referenciasRoutes)
+app.use("/api", diagnosticosRoutes)
+app.use("/api", procedimientosRoutes)
 app.use("/api", imgbdOdontogramaRoutes)
 app.use("/api", imgbdFirmaRoutes)
 app.use("/api", reportesRoutes)

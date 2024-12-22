@@ -46,13 +46,13 @@ export const deleteEvoluciones = async (req, res) => {
 };
 
 export const createEvolucion = async (req, res) => { try {
-  const { documento, nombre, motivo, sesion, procedimiento, firma, odontograma, consentimiento_uno,consentimiento_dos,consentimiento_tres,consentimiento_cuatro, fecha,hora,fecha_registro } = req.body;
+  const { documento, nombre, motivo, sesion, procedimiento, evolucion,firma, odontograma, consentimiento_uno,consentimiento_dos,consentimiento_tres,consentimiento_cuatro,anestesia,codigo_diagnostico,codigo_procedimiento, fecha,hora,fecha_registro } = req.body;
   const [result] = await pool.query(
-      "INSERT INTO evoluciones (documento, nombre, motivo, sesion, procedimiento, firma, odontograma, consentimiento_uno,consentimiento_dos,consentimiento_tres,consentimiento_cuatro,fecha,hora,fecha_registro) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [documento, nombre, motivo, sesion, procedimiento, firma, odontograma, consentimiento_uno,consentimiento_dos,consentimiento_tres,consentimiento_cuatro, fecha,hora,fecha_registro]
+      "INSERT INTO evoluciones (documento, nombre, motivo, sesion, procedimiento, evolucion,firma, odontograma, consentimiento_uno,consentimiento_dos,consentimiento_tres,consentimiento_cuatro,anestesia,codigo_diagnostico,codigo_procedimiento,fecha,hora,fecha_registro) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?, ?, ?, ?, ?, ?)",
+      [documento, nombre, motivo, sesion, procedimiento, evolucion,firma, odontograma, consentimiento_uno,consentimiento_dos,consentimiento_tres,consentimiento_cuatro,anestesia,codigo_diagnostico,codigo_procedimiento, fecha,hora,fecha_registro]
   );
 
-  res.status(201).json({ id: result.insertId, documento, nombre, motivo, sesion, procedimiento, firma, odontograma,consentimiento_uno,consentimiento_dos,consentimiento_tres,consentimiento_cuatro, fecha,hora,fecha_registro });   
+  res.status(201).json({ id: result.insertId, documento, nombre, motivo, sesion, procedimiento, evolucion,firma, odontograma,consentimiento_uno,consentimiento_dos,consentimiento_tres,consentimiento_cuatro,anestesia,codigo_diagnostico,codigo_procedimiento, fecha,hora,fecha_registro });   
 } catch (error) {
   res.status(500).json({ message: "Something went wrong" });
 }
@@ -67,31 +67,39 @@ export const updateEvolucion = async (req, res) => {
       motivo,
       sesion,
       procedimiento,
+      evolucion,
       firma,
       odontograma,
       consentimiento_uno,
       consentimiento_dos,
       consentimiento_tres,
       consentimiento_cuatro,
+      anestesia,
+      codigo_diagnostico,
+      codigo_procedimiento,
       fecha,
       hora,
       fecha_registro
     } = req.body;
 
     const [result] = await pool.query(
-      "UPDATE evoluciones SET documento = IFNULL(?, documento), nombre = IFNULL(?, nombre), motivo = IFNULL(?, motivo), sesion = IFNULL(?, sesion), procedimiento = IFNULL(?, procedimiento), firma = IFNULL(?, firma), odontograma = IFNULL(?, odontograma), consentimiento_uno = IFNULL(?, consentimiento_uno), consentimiento_dos = IFNULL(?, consentimiento_dos), consentimiento_tres = IFNULL(?, consentimiento_tres), consentimiento_cuatro = IFNULL(?, consentimiento_cuatro), fecha = IFNULL(?, fecha), hora = IFNULL(?, hora), fecha_registro = IFNULL(?, fecha_registro)   WHERE id = ?",
+      "UPDATE evoluciones SET documento = IFNULL(?, documento), nombre = IFNULL(?, nombre), motivo = IFNULL(?, motivo), sesion = IFNULL(?, sesion), procedimiento = IFNULL(?, procedimiento), evolucion = IFNULL(?, evolucion),firma = IFNULL(?, firma), odontograma = IFNULL(?, odontograma), consentimiento_uno = IFNULL(?, consentimiento_uno), consentimiento_dos = IFNULL(?, consentimiento_dos), consentimiento_tres = IFNULL(?, consentimiento_tres), consentimiento_cuatro = IFNULL(?, consentimiento_cuatro),  anestesia = IFNULL(?, anestesia), codigo_diagnostico = IFNULL(?, codigo_diagnostico),codigo_procedimiento = IFNULL(?, codigo_procedimiento),fecha = IFNULL(?, fecha), hora = IFNULL(?, hora), fecha_registro = IFNULL(?, fecha_registro)   WHERE id = ?",
       [
         documento,
         nombre,
         motivo,
         sesion,
         procedimiento,
+        evolucion,
         firma,
         odontograma,
         consentimiento_uno,
         consentimiento_dos,
         consentimiento_tres,
         consentimiento_cuatro,
+        anestesia,
+        codigo_diagnostico,
+        codigo_procedimiento,
         fecha,
         hora,
         fecha_registro,
